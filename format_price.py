@@ -1,7 +1,6 @@
 import argparse
 
 
-
 def create_parser():
     parser = argparse.ArgumentParser(
         description='''
@@ -20,7 +19,7 @@ def create_parser():
 def format_price(price):
     try:
         pattern = '{:,.0f}'
-        if '.' in price and int(price.split('.')[-1][:2])>0:
+        if '.' in price and int(price.split('.')[-1][:2]) > 0:
             pattern = '{:,.2f}'
         return pattern.format(float(price)).replace(',', ' ')
     except (ValueError, TypeError):
