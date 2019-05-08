@@ -25,6 +25,34 @@ class FormatPriceTestCase(unittest.TestCase):
         price = format_price('12345.45234234')
         self.assertEqual(price, '12 345.45')
 
+    def test_integer(self):
+        price = format_price(12345)
+        self.assertEqual(price, '12 345')
+
+    def test_float(self):
+        price = format_price(12345.1313213)
+        self.assertEqual(price, '12 345.13')
+
+    def test_round_more_than_three_decimal_digits_almost_one(self):
+        price = format_price(12345.999)
+        self.assertEqual(price, '12 346')
+
+    def test_round_more_than_three_digits_ninety_nine(self):
+        price = format_price(12345.99)
+        self.assertEqual(price, '12 345.99')
+
+    def test_none(self):
+        price = format_price(None)
+        self.assertIsNone(price)
+
+    def test_decimal_almost_one_cent(self):
+        price = format_price(12345.0051)
+        self.assertEqual(price, '12 345.01')
+
+    def test_decimal_almost_zero(self):
+        price = format_price(12345.00000000456)
+        self.assertEqual(price, '12 345')
+
 
 if __name__ == '__main__':
     unittest.main()
