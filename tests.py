@@ -53,6 +53,10 @@ class FormatPriceTestCase(unittest.TestCase):
         price = format_price(12345.00000000456)
         self.assertEqual(price, '12 345')
 
+    def test_boolean(self):
+        price = format_price(True)
+        self.assertIsNone(price)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -17,11 +17,13 @@ def create_parser():
 
 
 def format_price(price):
+    if isinstance(price, bool):
+        return
     try:
-        pattern = '{:,.0f}'
-        price = float(price)
-        if 0.005 < price % 1 <= 0.991:
-            pattern = '{:,.2f}'
+        pattern = '{:,.2f}'
+        price = round(float(price), 2)
+        if price.is_integer():
+            pattern = '{:,.0f}'
         return pattern.format(price).replace(',', ' ')
     except (ValueError, TypeError):
         pass
